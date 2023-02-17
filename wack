@@ -1,0 +1,47 @@
+from sklearn import linear_model
+from sklearn.metrics import mean_squared_error
+# Define the range of hyperparameters to search over
+n_values = [10, 50, 100]
+l1_values = [0.1, 1, 10]
+l2_values = [0.01, 0.1, 1]
+best_model = Nonebest_rmse = float('inf')
+
+# Perform grid search over hyperparameters 
+for n in n_values:
+    for l1 in l1_values:        
+        for l2 in l2_values:           
+        # Train the model           
+            model = linear_model.LinearRegression()           
+            model.fit(train, validate)            
+            
+        # Evaluate the model on training and validation sets           
+            y_train_pred = model.predict(train)            
+            train_rmse = mean_squared_error(validate, y_train_pred, squared=False)            
+            y_val_pred = model.predict(validate)  
+            
+            val_rmse = mean_squared_error(y_val, y_val_pred, squared=False)            
+            # Print the RMSE for the current set of hyperparameters            
+            print(f"n={n}, L1={l1}, L2={l2}: Train RMSE = {train_rmse:.4f}, Val RMSE = {val_rmse:.4f}")           
+            # Keep track of the best model  
+            if val_rmse < best_rmse:                
+            best_model = model                
+            best_rmse = val_rmse
+            
+            
+# Plot the labeled scatterplot of the training and validation RMSE for each set of hyperparameters
+# This code assumes you have Matplotlib installed
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+for n in n_values:    
+    for l1 in l1_values:        
+        for l2 in l2_values:            
+            train_rmse = ...            
+            val_rmse = ...            
+            ax.scatter(train_rmse, val_rmse, label=f"n={n}, L1={l1}, L2={l2}")
+            ax.set_xlabel("Training RMSE")
+            ax.set_ylabel("Validation RMSE")ax.legend()
+            plt.show()
+
+# Print the best hyperparameters and the corresponding RMSE on the validation set
+print(f"Best hyperparameters: {best_model.get_params()}")
+print(f"Validation RMSE: {best_rmse:.4f}")
